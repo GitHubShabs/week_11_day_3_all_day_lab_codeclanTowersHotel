@@ -5,11 +5,13 @@ public class Hotel {
     private String name;
     private ArrayList<Bedroom> bedrooms;
     private ArrayList<ConferenceRoom> conferenceRooms;
+    private ArrayList<DiningRoom> diningRooms;
 
     public Hotel(String name){
         this.name = name;
         this.bedrooms = new ArrayList<>();
         this.conferenceRooms = new ArrayList<>();
+        this.diningRooms = new ArrayList<>();
     }
 
     public void addBedRoom(Bedroom bedroom){
@@ -51,5 +53,23 @@ public class Hotel {
     }
     public int getNumberOfConferenceRooms(){
         return this.conferenceRooms.size();
+    }
+    public void addDiningRoom(DiningRoom diningRoom){
+        this.diningRooms.add(diningRoom);
+    }
+
+    public void addGuestToDiningRoom(Guest guest, DiningRoom diningRoom){
+        if (diningRoom.hasSpace()){
+            diningRoom.addGuest(guest);
+        }
+    }
+    public void removeGuestFromDiningRoom(Guest guest, DiningRoom diningRoom){
+        diningRoom.removeGuest(guest);
+    }
+    public int numberOfGuestsInDiningRoom(DiningRoom diningRoom){
+        return diningRoom.numberOfGuestsInRoom();
+    }
+    public int getNumberOfDiningRooms(){
+        return this.diningRooms.size();
     }
 }

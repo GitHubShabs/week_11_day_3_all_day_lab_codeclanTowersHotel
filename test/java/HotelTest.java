@@ -8,6 +8,7 @@ public class HotelTest {
     Hotel hotel;
     Bedroom bedroom1, bedroom2, bedroom3, bedroom4;
     ConferenceRoom conf1, conf2, conf3, conf4;
+    DiningRoom din1, din2, din3, din4;
     Guest guest1, guest2, guest3;
 
     @Before
@@ -32,7 +33,14 @@ public class HotelTest {
         hotel.addConferenceRoom(conf2);
         hotel.addConferenceRoom(conf3);
         hotel.addConferenceRoom(conf4);
-
+        din1 = new DiningRoom("Tom", 2);
+        din2 = new DiningRoom("Jerry", 4);
+        din3 = new DiningRoom("Itchy", 5);
+        din4 = new DiningRoom("Scratchy", 3);
+        hotel.addDiningRoom(din1);
+        hotel.addDiningRoom(din2);
+        hotel.addDiningRoom(din3);
+        hotel.addDiningRoom(din4);
 
 
     }
@@ -92,5 +100,31 @@ public class HotelTest {
         assertEquals(2, hotel.numberOfGuestsInConferenceRoom(conf1));
         hotel.removeGuestFromConferenceRoom(guest1, conf1);
         assertEquals(1, hotel.numberOfGuestsInConferenceRoom(conf1));
+    }
+    @Test
+    public void testAddDiningRoom() {
+        assertEquals(4, hotel.getNumberOfDiningRooms());
+    }
+    @Test
+    public void canAddGuestToDiningRoom() {
+        hotel.addGuestToDiningRoom(guest2, din1);
+        assertEquals(1, hotel.numberOfGuestsInDiningRoom(din1));
+    }
+    @Test
+    public void canAddGuestToDiningRoom_capacity_reached() {
+        hotel.addGuestToDiningRoom(guest2, din1);
+        hotel.addGuestToDiningRoom(guest1, din1);
+        assertEquals(2, hotel.numberOfGuestsInDiningRoom(din1));
+        hotel.addGuestToDiningRoom(guest3, din1);
+        assertEquals(2, hotel.numberOfGuestsInDiningRoom(din1));
+    }
+
+    @Test
+    public void testRemoveGuestFromDiningRoom() {
+        hotel.addGuestToDiningRoom(guest2, din1);
+        hotel.addGuestToDiningRoom(guest1, din1);
+        assertEquals(2, hotel.numberOfGuestsInDiningRoom(din1));
+        hotel.removeGuestFromDiningRoom(guest1, din1);
+        assertEquals(1, hotel.numberOfGuestsInDiningRoom(din1));
     }
 }
