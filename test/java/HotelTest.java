@@ -7,6 +7,7 @@ public class HotelTest {
 
     Hotel hotel;
     Bedroom bedroom1, bedroom2, bedroom3, bedroom4;
+    ConferenceRoom conf1, conf2, conf3, conf4;
     Guest guest1, guest2, guest3;
 
     @Before
@@ -23,6 +24,15 @@ public class HotelTest {
         hotel.addBedRoom(bedroom2);
         hotel.addBedRoom(bedroom3);
         hotel.addBedRoom(bedroom4);
+        conf1 = new ConferenceRoom("Tom", 2);
+        conf2 = new ConferenceRoom("Jerry", 4);
+        conf3 = new ConferenceRoom("Itchy", 5);
+        conf4 = new ConferenceRoom("Scratchy", 3);
+        hotel.addConferenceRoom(conf1);
+        hotel.addConferenceRoom(conf2);
+        hotel.addConferenceRoom(conf3);
+        hotel.addConferenceRoom(conf4);
+
 
 
     }
@@ -52,9 +62,35 @@ public class HotelTest {
     @Test
     public void testRemoveGuestFromRoom() {
         hotel.addGuestToBedRoom(guest2, bedroom1);
-        hotel.addGuestToBedRoom(guest1, bedroom1);
+        hotel.addGuestToBedRoom(guest1,bedroom1);
         assertEquals(2, hotel.numberOfGuestsInRoom(bedroom1));
         hotel.removeGuestFromBedRoom(guest1, bedroom1);
         assertEquals(1, hotel.numberOfGuestsInRoom(bedroom1));
+    }
+    @Test
+    public void testAddConferenceRoom() {
+        assertEquals(4, hotel.getNumberOfConferenceRooms());
+    }
+    @Test
+    public void canAddGuestToConferenceRoom() {
+        hotel.addGuestToConferenceRoom(guest2, conf1);
+        assertEquals(1, hotel.numberOfGuestsInConferenceRoom(conf1));
+    }
+    @Test
+    public void canAddGuestToConferenceRoom_capacity_reached() {
+        hotel.addGuestToConferenceRoom(guest2, conf1);
+        hotel.addGuestToConferenceRoom(guest1, conf1);
+        assertEquals(2, hotel.numberOfGuestsInConferenceRoom(conf1));
+        hotel.addGuestToConferenceRoom(guest3, conf1);
+        assertEquals(2, hotel.numberOfGuestsInConferenceRoom(conf1));
+    }
+
+    @Test
+    public void testRemoveGuestFromConferenceRoom() {
+        hotel.addGuestToConferenceRoom(guest2, conf1);
+        hotel.addGuestToConferenceRoom(guest1, conf1);
+        assertEquals(2, hotel.numberOfGuestsInConferenceRoom(conf1));
+        hotel.removeGuestFromConferenceRoom(guest1, conf1);
+        assertEquals(1, hotel.numberOfGuestsInConferenceRoom(conf1));
     }
 }
