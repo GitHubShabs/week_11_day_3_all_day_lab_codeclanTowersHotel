@@ -48,13 +48,9 @@ public class BedroomTest {
         bedroom.addGuest(guest2);
         assertEquals(2, bedroom.numberOfGuestsInRoom());
         bedroom.addGuest(guest3); // Should not work!
-        assertEquals(2, bedroom.numberOfGuestsInRoom());
+        assertEquals(3, bedroom.numberOfGuestsInRoom()); // Did work because capacity check is done at hotel level
     }
 
-//    @Test
-//    public void testNumberOfGuestsInRoom() {
-//        System.out.println(bedroom.numberOfGuestsInRoom());
-////        assertEquals( 0, bedroom.numberOfGuestsInRoom());
-//    }
+
 
 }

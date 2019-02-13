@@ -22,6 +22,14 @@ public class Hotel {
     }
      public void removeGuestFromBedRoom(Guest guest, Bedroom bedroom){
         bedroom.removeGuest(guest);
-     }
-
+    }
+    public int numberOfGuestsInRoom(Bedroom bedroom){
+        return bedroom.numberOfGuestsInRoom();
+    }
+    public String getName() {
+        return this.name;
+    }
+    public int getNumberOfBedrooms(){
+        return this.bedrooms.size();
+    }
 }
